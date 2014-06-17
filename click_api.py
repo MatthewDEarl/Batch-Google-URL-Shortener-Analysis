@@ -6,7 +6,7 @@ import csv
 INPUT_FILE = 'shorturl.csv'
 OUTPUT_FILE = 'clicks.csv'
 
-def getArrayOfShortURLsFromFile(fileURL):
+def getArrayOfShortURLsWithFile(fileURL):
 	shortURLs = []
 
 	csvFile = open(fileURL, "rb")
@@ -19,16 +19,16 @@ def getArrayOfShortURLsFromFile(fileURL):
 
 	return shortURLs
 
-def useGoogleAPIToReceiveClicksForAllTimeForArrayOfShortURLs(shortURLs):
+def useGoogleShortURLAPIToReceiveClicksWithArrayOfShortURLs(shortURLs):
 	clicks = []
 
 	for url in shortURLs:
-		data = getJSONForURL(url)
+		data = getJSONWithURL(url)
 		clicks.append(int(data['analytics']['allTime']['shortUrlClicks']))
 
 	return clicks
 
-def getJSONForURL(url):
+def getJSONWithURL(url):
 	apiURL = 'https://www.googleapis.com/urlshortener/v1/url?shortUrl=' + url + '&projection=FULL'
 	urlRequest = urllib2.urlopen(apiURL)
 	data = json.load(urlRequest)
@@ -52,8 +52,8 @@ def writeOutputToFile(urls, output, outputFile):
 		csvOutputFile.close()
 
 def runWithArguments(inputFile, outputFile):
-	urls = getArrayOfShortURLsFromFile(inputFile)
-	output =  useGoogleAPIToReceiveClicksForAllTimeForArrayOfShortURLs(urls)
+	urls = getArrayOfShortURLsWithFile(inputFile)
+	output =  useGoogleShortURLAPIToReceiveClicksWithArrayOfShortURLs(urls)
 	writeOutputToFile(urls, output, outputFile)
 
 # Run the program with arguments or fall back to defaults
