@@ -1,3 +1,7 @@
+"""
+Author: Matthew Earl <matthew.earl@me.com>
+"""
+
 import sys
 import json
 import urllib2
