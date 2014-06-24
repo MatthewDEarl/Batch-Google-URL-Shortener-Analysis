@@ -62,6 +62,7 @@ def runWithArguments(inputFile, outputFile):
 
 # Run the program with arguments or fall back to defaults
 if len(sys.argv) == 3:
+	assert sys.argv[1].endswith(".csv") && sys.argv[2].endswith(".csv")
 	runWithArguments(sys.argv[1], sys.argv[2])
 elif len(sys.argv) == 1:
 	runWithArguments(INPUT_FILE, OUTPUT_FILE)
